@@ -17,8 +17,21 @@ Bulk PNG → WebP converter. Runs entirely in the browser — no server, no uplo
 
 ```bash
 pnpm install
-pnpm dev          # starts Vite dev server
-pnpm build        # builds to /docs (used by GitHub Pages)
+```
+
+```bash
+# Start dev server (live reload)
+pnpm dev
+```
+
+```bash
+# Build for production (outputs to /docs)
+pnpm build
+```
+
+```bash
+# Preview the production build locally
+pnpm preview
 ```
 
 ## Deploy to GitHub Pages
