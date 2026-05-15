@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NGS Convert — Bulk PNG → WebP | NextGen Studioz</title>
+    <meta name="description" content="Free in-browser bulk PNG to WebP converter. No uploads, no limits. Built by NextGen Studioz." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div class="ngs-app" id="app">
+
+      <!-- ── DRAG OVERLAY ── -->
+      <div class="ngs-drag-overlay" id="dragOverlay">
+        <div class="ngs-drag-overlay__inner">
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+            <path d="M28 8v32M14 26l14 14 14-14" stroke="url(#dg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="8" y="42" width="40" height="6" rx="3" fill="url(#dg)" opacity=".5"/>
+            <defs>
+              <linearGradient id="dg" x1="8" y1="8" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#00D4FF"/>
+                <stop offset="100%" stop-color="#8B2BE2"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <p>Drop PNGs anywhere</p>
+        </div>
+      </div>
+
+      <!-- ── HEADER ── -->
+      <header class="ngs-header">
+        <div class="ngs-header__inner">
+          <a href="./" class="ngs-logo">
+            <img
+              src="./logo.png"
+              alt="NextGen Studioz"
+              class="ngs-logo__img"
+              id="logoImg"
+            />
+            <!-- Text fallback (shown if logo.png missing) -->
+            <div class="ngs-logo__fallback" id="logoFallback">
+              <span class="ngs-logo__ng">NG</span>
+              <div class="ngs-logo__wordmark">
+                <span class="ngs-logo__next">next<strong>GEN</strong></span>
+                <span class="ngs-logo__studioz">STUDIOZ</span>
+              </div>
+            </div>
+          </a>
+
+          <div class="ngs-header__meta">
+            <span class="ngs-pill">PNG → WebP</span>
+            <span class="ngs-header__tag">In-browser · Private · Unlimited</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- ── MAIN ── -->
+      <main class="ngs-main">
+
+        <!-- DROP ZONE -->
+        <section class="ngs-hero" id="heroSection">
+          <div class="ngs-dropzone" id="dropZone" role="button" tabindex="0" aria-label="Drop PNG files here or click to browse">
+            <div class="ngs-dropzone__bg"></div>
+            <div class="ngs-dropzone__content">
+              <div class="ngs-dropzone__icon">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                  <rect x="7" y="10" width="46" height="38" rx="5" stroke="url(#iz)" stroke-width="2" fill="none"/>
+                  <path d="M19 32l9-11 8 9 5-6 9 8" stroke="url(#iz)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="21" cy="22" r="3.5" fill="url(#iz)"/>
+                  <path d="M30 50v7M25 54l5 4 5-4" stroke="url(#iz)" stroke-width="2.5" stroke-linecap="round"/>
+                  <defs>
+                    <linearGradient id="iz" x1="7" y1="10" x2="53" y2="58" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stop-color="#00D4FF"/>
+                      <stop offset="55%" stop-color="#4F5EE8"/>
+                      <stop offset="100%" stop-color="#9333EA"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <h1 class="ngs-dropzone__headline">Drop PNGs here</h1>
+              <p class="ngs-dropzone__sub">
+                or <span class="ngs-link">click to browse</span> — any size, any quantity
+              </p>
+              <ul class="ngs-dropzone__chips">
+                <li>Any resolution</li>
+                <li>Bulk upload</li>
+                <li>Files stay on device</li>
+              </ul>
+            </div>
+            <input type="file" id="fileInput" accept="image/png" multiple hidden />
+          </div>
+        </section>
+
+        <!-- ── WORKSPACE ── -->
+        <div class="ngs-workspace hidden" id="workspace">
+
+          <!-- TOOLBAR -->
+          <div class="ngs-toolbar" id="toolbar">
+            <div class="ngs-toolbar__row">
+
+              <button class="ngs-add-btn" id="addMoreBtn" title="Add more PNGs">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                </svg>
+                Add files
+              </button>
+
+              <div class="ngs-sep"></div>
+
+              <!-- Quality -->
+              <div class="ngs-quality">
+                <span class="ngs-quality__lbl">Quality</span>
+                <input type="range" id="qualitySlider" min="1" max="100" value="85" class="ngs-quality__range" />
+                <input type="number" id="qualityNum" min="1" max="100" value="85" class="ngs-quality__input" />
+              </div>
+
+              <div class="ngs-sep"></div>
+
+              <!-- Action buttons -->
+              <div class="ngs-toolbar__actions">
+                <button class="ngs-btn ngs-btn--primary" id="convertAllBtn">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                    <path d="M1.5 7.5h12M9 3l4.5 4.5L9 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Convert All
+                </button>
+                <button class="ngs-btn ngs-btn--zip ngs-btn--hidden" id="downloadAllBtn">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                    <path d="M7.5 10L3 5.5 4.4 4.1 6.5 6.2V1h2v5.2l2.1-2.1L12 5.5 7.5 10zM2 11.5h11v2H2z" fill="currentColor"/>
+                  </svg>
+                  Download ZIP
+                </button>
+                <button class="ngs-btn ngs-btn--ghost" id="clearAllBtn">Clear all</button>
+              </div>
+            </div>
+
+            <!-- Stats strip -->
+            <div class="ngs-stats" id="statsBar">
+              <div class="ngs-stat">
+                <span class="ngs-stat__n" id="statFiles">0</span>
+                <span class="ngs-stat__l">files</span>
+              </div>
+              <div class="ngs-stat ngs-stat--done">
+                <span class="ngs-stat__n" id="statConverted">0</span>
+                <span class="ngs-stat__l">converted</span>
+              </div>
+              <div class="ngs-stat ngs-stat--saved">
+                <span class="ngs-stat__n" id="statSaved">—</span>
+                <span class="ngs-stat__l">saved</span>
+              </div>
+              <div class="ngs-stat ngs-stat--ratio">
+                <span class="ngs-stat__n" id="statRatio">—</span>
+                <span class="ngs-stat__l">avg smaller</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- FILE GRID -->
+          <div class="ngs-grid" id="fileGrid"></div>
+
+        </div>
+      </main>
+
+      <!-- ── FOOTER ── -->
+      <footer class="ngs-footer">
+        <div class="ngs-footer__inner">
+          <img src="./logo.png" alt="NextGen Studioz" class="ngs-footer__logo" id="footerLogo" />
+          <div class="ngs-footer__text">
+            <span>&copy; <span id="copyrightYear"></span> NextGen Studioz. All rights reserved.</span>
+            <span class="ngs-footer__tool">NGS Convert — Bulk PNG to WebP Converter</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+    <script>
+      document.getElementById('copyrightYear').textContent = new Date().getFullYear()
+
+      // Logo image fallback
+      const logoImg = document.getElementById('logoImg')
+      const logoFallback = document.getElementById('logoFallback')
+      const footerLogo = document.getElementById('footerLogo')
+      logoImg.onerror = () => {
+        logoImg.style.display = 'none'
+        logoFallback.style.display = 'flex'
+      }
+      footerLogo.onerror = () => { footerLogo.style.display = 'none' }
+    </script>
+  </body>
+</html>

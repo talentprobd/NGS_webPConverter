@@ -1,0 +1,12 @@
+{
+  "name": "ngs-webp-converter",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Monorepo: bulk PNG to WebP converter for GitHub Pages",
+  "scripts": {
+    "dev": "pnpm --filter converter dev",
+    "build": "pnpm --filter converter build",
+    "preview": "pnpm --filter converter preview"
+  },
+  "packageManager": "pnpm@9.0.0"
+}
