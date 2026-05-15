@@ -1,5 +1,19 @@
 import JSZip from 'jszip'
 
+// ─── Theme ────────────────────────────────────────────────────────────────
+const html         = document.documentElement
+const themeToggle  = document.getElementById('themeToggle')
+const savedTheme   = localStorage.getItem('ngs-theme')
+const systemDark   = window.matchMedia('(prefers-color-scheme: dark)').matches
+
+html.setAttribute('data-theme', savedTheme || (systemDark ? 'dark' : 'light'))
+
+themeToggle.addEventListener('click', () => {
+  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
+  html.setAttribute('data-theme', next)
+  localStorage.setItem('ngs-theme', next)
+})
+
 // ─── State ────────────────────────────────────────────────────────────────
 /** @type {Map<number, {file:File, name:string, origSize:number, blob:Blob|null, webpSize:number|null, origDataUrl:string|null, dims:string|null, status:string}>} */
 const files = new Map()

@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NGS Convert — Bulk PNG → WebP | NextGen Studioz</title>
-    <meta name="description" content="Free in-browser bulk PNG to WebP converter. No uploads, no limits. Built by NextGen Studioz." />
+    <title>NGS Forge — PNG to WebP | NextGen Studioz</title>
+    <meta name="description" content="NGS Forge by NextGen Studioz — transform your PNG assets into next-generation WebP format. Fast, private, and built for creative professionals." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
@@ -51,8 +51,19 @@
           </a>
 
           <div class="ngs-header__meta">
-            <span class="ngs-pill">PNG → WebP</span>
+            <span class="ngs-pill">NGS Forge</span>
             <span class="ngs-header__tag">In-browser · Private · Unlimited</span>
+            <button class="ngs-theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle light/dark theme">
+              <!-- Moon (dark mode) -->
+              <svg class="ngs-theme-toggle__moon" width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <!-- Sun (light mode) -->
+              <svg class="ngs-theme-toggle__sun" width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
           </div>
         </div>
       </header>
