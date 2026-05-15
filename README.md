@@ -2,7 +2,7 @@
 
 Bulk PNG → WebP converter. Runs entirely in the browser — no server, no upload.
 
-**Live:** https://\<your-github-username\>.github.io/\<repo-name\>/
+**Live:** https://talentprobd.github.io/NGS_webPConverter/
 
 ## Features
 
